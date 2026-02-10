@@ -74,11 +74,12 @@ def main():
     dp = updater.dispatcher
     dp.add_handler(CommandHandler("start", start))
     dp.add_handler(CommandHandler("approve", approve))
-    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command & ~Filters.forwarded, handle_message))
     
     logger.info(f"✅ Bot started successfully | Admin ID: {ADMIN_ID}")
     updater.start_polling(drop_pending_updates=True)
     updater.idle()
 
 if __name__ == '__main__':
+
     main()
